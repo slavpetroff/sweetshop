@@ -1,0 +1,2 @@
+# sweetshop
+Sweetshop Django project
