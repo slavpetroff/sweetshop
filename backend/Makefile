@@ -1,4 +1,4 @@
-NAME=slavpetroff/sweetshop
+NAME=slavpetroff/backend-sweetshop
 VERSION=`git describe --always`
 BRANCH=$(shell echo $(CI_BUILD_REF_NAME))
 CONTAINER_IP=$(shell echo $(docker-machine ip default))
