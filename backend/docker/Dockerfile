@@ -22,8 +22,8 @@ RUN apt-get install -y
 
 RUN apt-get install -y apt-utils
 
-# build dependencies for postgres and image bindings
-RUN apt-get install -y python-psycopg2 python3-psycopg2 python-pip python3-pip python-dev libpq-dev postgresql postgresql-contrib
+# Build dependencies for postgres
+RUN apt-get install -y python-psycopg2 python3-psycopg2 python-pip python3-pip python-dev postgresql postgresql-contrib
 
 RUN apt-get -y install binutils libproj-dev gdal-bin
 
