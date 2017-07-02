@@ -66,7 +66,7 @@ RUN ls -a /var/projects/frontend/docker/
 RUN chmod +x "/var/projects/frontend/docker/startup.sh"
 
 ################################################################################
-# Run start.sh script when the container starts.                               
+# Run startup.sh script when the container starts.                               
 # Note: If you run migrations etc outside ENTRYPOINT, envs won't be available! 
 ################################################################################
 
