@@ -16,7 +16,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from rest_framework import routers
-
 from .views import AccountViewSet
 
 router = routers.SimpleRouter()
