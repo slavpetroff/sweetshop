@@ -1,8 +1,8 @@
 from django.db import models
 from polymorphic.managers import PolymorphicManager
 from polymorphic.models import PolymorphicModel
-from django.contrib.auth.models import BaseUserManager, \
-        AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,\
+    BaseUserManager
 
 
 class AccountManager(BaseUserManager, PolymorphicManager):
@@ -114,8 +114,8 @@ class AbstractAccount(AbstractBaseUser, PermissionsMixin, PolymorphicModel):
 
     def __repr__(self):
         return "AbstractAccount.objects.create(first_name='{}', last_name='{}', \
-         email='{}', password='{}'".format(
-                 'John', 'Doe', 'john.doe@email.com', 'johnpass')
+         email='{}', password='{}'".format('John', 'Doe', 'john.doe@email.com',
+                                           'johnpass')
 
     def __str__(self):
         return self.email
