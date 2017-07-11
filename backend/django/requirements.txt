@@ -1,4 +1,5 @@
 Django==1.11.3
+djangorestframework==3.6.2
 pytz==2017.2
 django-polymorphic==1.1
 ipdb==0.10.3
