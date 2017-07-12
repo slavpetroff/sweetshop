@@ -1,4 +1,4 @@
-from core.base_viewset import BaseViewSet
+from helpers.base_viewset import BaseViewSet
 from .models import BaseAccount
 
 from .serializers import WholeAccountSerializer
