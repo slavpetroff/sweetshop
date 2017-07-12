@@ -19,5 +19,6 @@ from rest_framework import routers
 from .views import AccountViewSet
 
 router = routers.SimpleRouter()
-router.register(prefix=r'^accounts', viewset=AccountViewSet)
+router.register(
+    prefix=r'', viewset=AccountViewSet, base_name='account')
 urlpatterns = router.urls
