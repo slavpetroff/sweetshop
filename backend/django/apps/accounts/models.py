@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,\
     BaseUserManager
 
 
-class AccountManager(BaseUserManager, PolymorphicManager):
+class BaseAccountManager(BaseUserManager, PolymorphicManager):
     """
     This is the basic `User` class which will handle all operations on the
     `Account` models. It inherits from `PolymorphicManager` so we could create
@@ -48,7 +48,7 @@ class AbstractAccount(AbstractBaseUser, PermissionsMixin, PolymorphicModel):
     """
     Basic Model for all Accounts (Users). The __str__ method override is
     important, because if it is not overridden, we wont be able to choose
-    categories by the username in the dropdowns in admin panel. Otherwise
+    account by the email in the dropdowns in admin panel. Otherwise
     a text representing the class would be shown in the dropdowns.
     """
 
@@ -57,20 +57,17 @@ class AbstractAccount(AbstractBaseUser, PermissionsMixin, PolymorphicModel):
     false = False
     none = None
 
+    class Meta:
+        abstract = True
+
     FIRST_NAME_MAX_LENGTH = 50
     LAST_NAME_MAX_LENGTH = 50
-    PHONE_MAX_LENGTH = 20
-    ADDRESS_MAX_LENGTH = 100
 
     first_name = models.CharField(
         null=true, max_length=FIRST_NAME_MAX_LENGTH, blank=false)
     last_name = models.CharField(
         null=true, max_length=LAST_NAME_MAX_LENGTH, blank=false)
     email = models.EmailField(unique=true, blank=false)
-    telephone = models.CharField(
-        null=true, max_length=PHONE_MAX_LENGTH, blank=true)
-    address = models.TextField(
-        null=true, max_length=ADDRESS_MAX_LENGTH, blank=true)
 
     from django.utils import timezone
     registered_at = models.DateTimeField(default=timezone.now)
@@ -90,7 +87,6 @@ class AbstractAccount(AbstractBaseUser, PermissionsMixin, PolymorphicModel):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    objects = AccountManager()
 
     def get_full_name(self):
         """
@@ -112,10 +108,31 @@ class AbstractAccount(AbstractBaseUser, PermissionsMixin, PolymorphicModel):
         """
         return str(self.telephone)
 
-    def __repr__(self):
-        return "AbstractAccount.objects.create(first_name='{}', last_name='{}', \
-         email='{}', password='{}'".format('John', 'Doe', 'john.doe@email.com',
-                                           'johnpass')
-
     def __str__(self):
         return self.email
+
+
+class BaseAccount(AbstractAccount):
+    """
+    This is the base Account for all users.
+    """
+
+    # We cache the keywords for speed up
+    true = True
+    false = False
+    none = None
+
+    PHONE_MAX_LENGTH = 20
+    ADDRESS_MAX_LENGTH = 100
+
+    telephone = models.CharField(
+        null=true, max_length=PHONE_MAX_LENGTH, blank=true)
+    address = models.TextField(
+        null=true, max_length=ADDRESS_MAX_LENGTH, blank=true)
+
+    objects = BaseAccountManager()
+
+    def __repr__(self):
+        return "OrdinaryAccount.objects.create(first_name='{}', last_name='{}', \
+         email='{}', password='{}'".format('John', 'Doe', 'john.doe@email.com',
+                                           'johnpass')

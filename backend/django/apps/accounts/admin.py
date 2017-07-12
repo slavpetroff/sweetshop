@@ -1,17 +1,20 @@
 from django.contrib import admin
-from polymorphic.admin import PolymorphicParentModelAdmin, \
-        PolymorphicChildModelAdmin, PolymorphicChildModelFilter
-from .models import AbstractAccount
+# from polymorphic.admin import PolymorphicParentModelAdmin, \
+#        PolymorphicChildModelAdmin, PolymorphicChildModelFilter
+# from .models import AbstractAccount
+from .models import BaseAccount
 
+admin.site.register(BaseAccount)
 
-class BaseAccountAdmin(PolymorphicChildModelAdmin):
-    """ Base admin class for all child models """
-    base_model = AbstractAccount
-
-
-@admin.register(AbstractAccount)
-class ParentAccountAdmin(PolymorphicParentModelAdmin):
-    """ The parent model admin """
-    base_model = AbstractAccount
-    child_models = (AbstractAccount,)
-    list_filter = (PolymorphicChildModelFilter,)
+#  @admin.register(AbstractAccount)
+#  class ParentAccountAdmin(PolymorphicParentModelAdmin):
+#      """ Parent model admin """
+#      base_model = AbstractAccount
+#      child_models = (BaseAccount,)
+#      list_filter = (PolymorphicChildModelFilter,)
+#
+#
+#  @admin.register(BaseAccount)
+#  class OrdinaryAccountAdmin(PolymorphicChildModelAdmin):
+#      """ BaseAccount admin """
+#      base_model = BaseAccount

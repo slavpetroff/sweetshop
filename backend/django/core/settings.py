@@ -120,4 +120,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'accounts.AbstractAccount'
+AUTH_USER_MODEL = 'accounts.BaseAccount'

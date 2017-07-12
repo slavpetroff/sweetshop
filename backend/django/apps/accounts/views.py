@@ -1,9 +1,9 @@
 from core.base_viewset import BaseViewSet
-from .models import AbstractAccount
+from .models import BaseAccount
 
 from .serializers import WholeAccountSerializer
 
 
 class AccountViewSet(BaseViewSet):
-    queryset = AbstractAccount.objects.all()
+    queryset = BaseAccount.objects.all()
     serializer_class = WholeAccountSerializer
