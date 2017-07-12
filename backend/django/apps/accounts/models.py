@@ -133,6 +133,6 @@ class BaseAccount(AbstractAccount):
         return str(self.phone_number)
 
     def __repr__(self):
-        return "BaseAccount.objects.create(first_name='{}', last_name='{}', \
-         email='{}', password='{}'".format('John', 'Doe', 'john.doe@email.com',
-                                           'johnpass')
+        return "BaseAccount.objects.create(first_name='{}', last_name='{}'," +\
+                " email='{}', password='{}'".format(
+                        'John', 'Doe', 'john.doe@email.com', 'johnpass')
