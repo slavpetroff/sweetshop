@@ -102,12 +102,6 @@ class AbstractAccount(AbstractBaseUser, PermissionsMixin, PolymorphicModel):
 
         return str(self.first_name)
 
-    def get_telephone(self):
-        """
-        Returns the telephone number of the user
-        """
-        return str(self.telephone)
-
     def __str__(self):
         return self.email
 
@@ -125,14 +119,20 @@ class BaseAccount(AbstractAccount):
     PHONE_MAX_LENGTH = 20
     ADDRESS_MAX_LENGTH = 100
 
-    telephone = models.CharField(
+    phone_number = models.CharField(
         null=true, max_length=PHONE_MAX_LENGTH, blank=true)
     address = models.TextField(
         null=true, max_length=ADDRESS_MAX_LENGTH, blank=true)
 
     objects = BaseAccountManager()
 
+    def get_phone_number(self):
+        """
+        Returns the phone number of the user
+        """
+        return str(self.phone_number)
+
     def __repr__(self):
-        return "OrdinaryAccount.objects.create(first_name='{}', last_name='{}', \
+        return "BaseAccount.objects.create(first_name='{}', last_name='{}', \
          email='{}', password='{}'".format('John', 'Doe', 'john.doe@email.com',
                                            'johnpass')

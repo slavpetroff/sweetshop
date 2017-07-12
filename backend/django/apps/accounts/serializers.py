@@ -8,7 +8,7 @@ class WholeAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = BaseAccount
         fields = ('id', 'first_name', 'last_name', 'email', 'password',
-                  'telephone', 'address', 'last_activity_at',
+                  'phone_number', 'address', 'last_activity_at',
                   'last_activity_at',)
 
     def create(self, validated_data):
