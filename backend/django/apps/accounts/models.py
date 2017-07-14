@@ -31,6 +31,18 @@ class BaseAccountManager(BaseUserManager, PolymorphicManager):
 
         return self._create_user(email, password, **extra_fields)
 
+    def create_user(self, **validated_data):
+        email = validated_data.get('email', None)
+        password = validated_data.get('password', None)
+
+        _user = self._create_user(email=email, password=password)
+        _user.first_name = validated_data.get('first_name', None)
+        _user.last_name = validated_data.get('last_name', None)
+        _user.address = validated_data.get('address', None)
+        _user.save()
+
+        return _user
+
     def _create_user(self, email, password, **extra_fields):
         """
         Creates and saves an User with the given email and password.
