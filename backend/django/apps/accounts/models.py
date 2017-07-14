@@ -20,6 +20,17 @@ class BaseAccountManager(BaseUserManager, PolymorphicManager):
 
     use_in_migrations = true
 
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', self.true)
+        extra_fields.setdefault('is_superuser', self.true)
+
+        if extra_fields.get('is_staff') is not self.true:
+            raise ValueError('Superuser must have is_staff=self.true.')
+        if extra_fields.get('is_superuser') is not self.true:
+            raise ValueError('Superuser must have is_superuser=self.true.')
+
+        return self._create_user(email, password, **extra_fields)
+
     def _create_user(self, email, password, **extra_fields):
         """
         Creates and saves an User with the given email and password.
@@ -31,17 +42,6 @@ class BaseAccountManager(BaseUserManager, PolymorphicManager):
         user.save(using=self._db)
 
         return user
-
-    def create_superuser(self, email, password, **extra_fields):
-        extra_fields.setdefault('is_staff', self.true)
-        extra_fields.setdefault('is_superuser', self.true)
-
-        if extra_fields.get('is_staff') is not self.true:
-            raise ValueError('Superuser must have is_staff=self.true.')
-        if extra_fields.get('is_superuser') is not self.true:
-            raise ValueError('Superuser must have is_superuser=self.true.')
-
-        return self._create_user(email, password, **extra_fields)
 
 
 class AbstractAccount(AbstractBaseUser, PermissionsMixin, PolymorphicModel):
