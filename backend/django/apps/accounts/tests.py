@@ -30,3 +30,19 @@ class FactoryBoyCreateUserTest(APITestCase):
         self.assertJSONEqual(
             raw=json.dumps(response.data),
             expected_data=WholeAccountSerializer(self.user).data)
+
+
+class CreateUserTest(APITestCase):
+
+    def setUp(self):
+        self.user = UserFactory()
+
+    def test_create_user(self):
+        self.user.email = 'john@email.com'
+        data = json.dumps(WholeAccountSerializer(self.user).data)
+        response = self.client.post(
+            reverse('_accounts:account-list'),
+            data,
+            content_type='application/json')
+        self.assertEqual(
+            first=response.status_code, second=status.HTTP_201_CREATED)
