@@ -12,7 +12,7 @@ class WholeAccountSerializer(serializers.ModelSerializer):
                   'last_activity_at',)
 
     def create(self, validated_data):
-        return BaseAccount.objects.create(**validated_data)
+        return BaseAccount.objects.create_user(**validated_data)
 
     def update(self, instance, validated_data):
         return BaseAccount.objects.update_user(
